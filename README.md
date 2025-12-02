@@ -1,6 +1,6 @@
-## **GridScope**
+## **Gridscope**
 
-GridScope is a dashboard built with **Angular**, **Material UI**, and **Chart.js**, designed for managing and visualizing the state of energy network components such as meters, batteries, transformers, and chargers.
+Gridscope is a dashboard built with **Angular**, **Material UI**, and **Chart.js**, designed for managing and visualizing the state of energy network components such as meters, batteries, transformers, and chargers.
 
 The project consists of **two separate repositories**:
 
