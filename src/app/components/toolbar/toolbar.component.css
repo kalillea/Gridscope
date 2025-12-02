@@ -42,3 +42,44 @@
   padding-inline: 16px;
   background-color: rgb(190, 255, 164) !important;
 }
+
+/* Make the bolt icon larger */
+.brand-icon mat-icon {
+  font-size: 36px; /* default is 24px */
+  width: 36px;
+  height: 36px;
+}
+
+/* Title and subtitle */
+.title-group .title {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.title-group .subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Navigation buttons: icon + text */
+.nav-button mat-icon {
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.nav-button span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Optional: increase spacing between buttons slightly */
+.nav-button {
+  margin-left: 8px;
+}
+
+/* Apply hover color to the whole button (text + icon) */
+.nav-button:hover mat-icon,
+.nav-button:hover span {
+  color: rgb(0, 216, 4);
+}

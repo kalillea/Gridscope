@@ -14,7 +14,7 @@
 
 /* Make chart not shrink */
 .dashboard-grid app-history-chart {
-  min-width: 420px;
+  min-width: 520px;
 }
 
 /* Optional: Give both panel-like appearance */
@@ -38,6 +38,6 @@ app-history-chart {
 
 .chart-wrapper.visible {
   opacity: 1;
-  margin-right: -10px;
+  margin-right: -105px;
   transform: translateX(0);
 }
