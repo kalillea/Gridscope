@@ -1,59 +1,123 @@
-# Gridscope
+## **GridScope**
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+GridScope is a dashboard built with **Angular**, **Material UI**, and **Chart.js**, designed for managing and visualizing the state of energy network components such as meters, batteries, transformers, and chargers.
 
-## Development server
+The project consists of **two separate repositories**:
 
-To start a local development server, run:
+* **GridScope** → Angular application (this repo)
+* **GridScope-API** → Node.js/Express REST API providing component + history data
+
+
+## Tech Stack
+
+### **Frontend**
+
+* Angular
+* Angular Material
+* Chart.js + ng2-charts
+* TypeScript
+
+### **Backend** (in *GridScope-API* repository)
+
+* Node.js
+* RESTful API
+
+
+## Project Structure (Frontend)
+
+```
+src/
+ ├─ app/
+ │   ├─ components/
+ │   │   ├─ component-list/        # Table of components
+ │   │   ├─ history-chart/         # Chart.js component
+ │   │   ├─ toolbar/               # Header bar
+ │   ├─ services/
+ │   │   ├─ energy-component.service.ts
+ │   │   ├─ history.service.ts
+ │   ├─ app.ts                     # Root component
+ │   ├─ app.routes.ts
+ │   ├─ app.config.ts
+ └─ index.html
+```
+
+---
+
+## Initialize
+
+### 1. Clone the frontend repository
+
+```bash
+git clone https://github.com/your-user/Gridscope.git
+cd Gridscope
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Angular development server
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Now visit:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## Backend Setup (GridScope-API)
+
+Clone the API repository:
 
 ```bash
-ng generate --help
+git clone https://github.com/your-user/Gridscope-api.git
+cd Gridscope-api
 ```
 
-## Building
-
-To build the project run:
+Install dependencies:
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Run the API:
 
 ```bash
-ng test
+npm run dev
 ```
 
-## Running end-to-end tests
+By default, it listens on:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+http://localhost:3000
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## API Endpoints (from GridScope-API)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### **Components**
+
+| Method | Endpoint                       | Description              |
+| ------ | ------------------------------ | ------------------------ |
+| GET    | `/api/components?offset&limit` | Get paginated components |
+| GET    | `/api/components/:id`          | Get component by ID      |
+| POST   | `/api/components`              | Create new component     |
+| PUT    | `/api/components/:id`          | Update component         |
+| DELETE | `/api/components/:id`          | Delete component         |
+
+### **History**
+
+| Method | Endpoint           | Description               |
+| ------ | ------------------ | ------------------------- |
+| GET    | `/api/history/:id` | Get history for component |
+
+History is **randomly generated** per component at server startup and provides 50 timestamp/value pairs per component.
+
