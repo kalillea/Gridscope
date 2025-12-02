@@ -1,4 +1,119 @@
+/* GLOBAL STYLES FOR GRIDSCOPE */
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* ------------------------------
+   CSS RESET / NORMALIZE
+   ------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------
+      ROOT VARIABLES
+      ------------------------------ */
+:root {
+  --page-padding: 24px;
+  --card-padding: 16px;
+  --toolbar-height: 100px;
+  --border-radius: 8px;
+
+  --shadow-elev-1: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --shadow-elev-2: 0 2px 6px rgba(0, 0, 0, 0.18);
+  --shadow-elev-3: 0 4px 12px rgba(0, 0, 0, 0.24);
+
+  --primary: #fff6ea;
+  --primary-dark: #fff0cb;
+
+  --surface: #f6edd0;
+  --background: #fef5d7;
+}
+
+/* ------------------------------
+      OVERLAY (Dialogs / Menus)
+      ------------------------------ */
+.cdk-overlay-pane {
+  z-index: 100;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: bisque !important;
+}
+
+/* ------------------------------
+      GLOBAL LAYOUT
+      ------------------------------ */
+html,
+body {
+  height: 100%;
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  padding: var(--page-padding);
+}
+
+/* ------------------------------
+      MATERIAL TOOLBAR (Header)
+      ------------------------------ */
+
+body mat-toolbar .spacer {
+  flex: 1;
+}
+
+body mat-toolbar button {
+  text-transform: none;
+  font-weight: 1500;
+  margin-left: 4px;
+}
+
+/* ------------------------------
+      MATERIAL TABLE (MDC)
+      ------------------------------ */
+
+/* Container */
+body table.mat-mdc-table {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-elev-1);
+  overflow: hidden;
+}
+.mat-mdc-row {
+  color: #737373 !important;
+}
+
+.mat-mdc-form-field-infix {
+  width: 100px;
+  border: 10px solid --background !important;
+  min-height: 0px !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-focus-overlay {
+}
+
+.mat-mdc-form-field.mat-mdc-form-field-type-mat-select .mat-mdc-form-field-focus-overlay {
+  border: 2px solid #333 !important;
+  border-radius: 2px;
+}
+
+.mdc-notched-outline {
+  width: 0px !important;
+  height: 0px !important;
+}
+.cdk-overlay-pane {
+  background-color: #ffffff !important;
+}
+
+.mdc-text-field--outlined {
+  padding-left: 0px;
+}

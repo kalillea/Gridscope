@@ -1,8 +1,6 @@
 .header-toolbar {
   padding-inline: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .brand-icon {
   margin-right: 8px;
 }
@@ -13,13 +11,14 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 
 .subtitle {
-  font-size: 12px;
+  font-size: 18px;
+  font-style: italic;
   opacity: 0.8;
 }
 
@@ -36,6 +35,10 @@
   margin-right: 4px;
 }
 
-.subtitle {
-  font-style: italic;
+.header-toolbar {
+  height: var(--toolbar-height);
+  display: flex;
+  align-items: center;
+  padding-inline: 16px;
+  background-color: rgb(190, 255, 164) !important;
 }

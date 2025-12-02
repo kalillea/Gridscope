@@ -1,3 +1,13 @@
 <header-toolbar></header-toolbar>
-<app-components-list></app-components-list>
-<app-history-chart [history]="componentHistory"></app-history-chart>
+
+<div class="content-row">
+  <div class="dashboard-grid">
+    <app-components-list (historySelected)="setHistory($event)"> </app-components-list>
+
+    @if (history$ | async; as history) {
+    <div class="chart-wrapper" [class.visible]="history.length > 0">
+      <app-history-chart [history]="history"></app-history-chart>
+    </div>
+    }
+  </div>
+</div>

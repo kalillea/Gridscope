@@ -28,9 +28,10 @@ Chart.register(
   standalone: true,
   imports: [BaseChartDirective],
   templateUrl: './history-chart.component.html',
+  styleUrl: './history-chart.component.css',
 })
 export class HistoryChartComponent implements OnChanges {
-  @Input() history: { timestamp: string; value: number }[] = [];
+  @Input() history: { timestamp: string; value: number }[] | null = [];
 
   public chartType: ChartType = 'line';
 
@@ -41,7 +42,7 @@ export class HistoryChartComponent implements OnChanges {
         label: 'Status',
         data: [],
         borderWidth: 2,
-        tension: 0.3,
+        tension: 0,
       },
     ],
   };
@@ -50,11 +51,23 @@ export class HistoryChartComponent implements OnChanges {
     responsive: true,
   };
 
+  ngOnInit() {}
+
   ngOnChanges(): void {
+    console.log(this.history);
     if (!this.history || this.history.length === 0) return;
 
-    this.chartData.labels = this.history.map((h) => new Date(h.timestamp).toLocaleTimeString());
+    this.chartData = {
+      labels: this.history.map((h) => new Date(h.timestamp).toLocaleDateString()),
 
-    this.chartData.datasets[0].data = this.history.map((h) => h.value);
+      datasets: [
+        {
+          label: 'Energiforbruk (KWh)',
+          data: this.history.map((h) => h.value),
+          borderWidth: 2,
+          tension: 0.3,
+        },
+      ],
+    };
   }
 }

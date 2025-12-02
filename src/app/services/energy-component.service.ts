@@ -15,6 +15,7 @@ interface ComponentsListResponse {
 })
 export class EnergyComponentsService {
   private readonly baseUrl = 'http://localhost:3000/api/components';
+  private readonly historyUrl = 'http://localhost:3000/api/history';
 
   constructor(private http: HttpClient) {}
 

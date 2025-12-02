@@ -1,0 +1,43 @@
+.content-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px; /* Left = flexible, Right = fixed */
+  gap: 24px;
+  padding: 24px;
+  align-items: start;
+}
+
+/* Make chart not shrink */
+.dashboard-grid app-history-chart {
+  min-width: 420px;
+}
+
+/* Optional: Give both panel-like appearance */
+.dashboard-grid > * {
+  background: white;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+app-history-chart {
+  display: block;
+}
+
+.chart-wrapper {
+  opacity: 0;
+  padding: 10px;
+  transform: translateX(-40px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.chart-wrapper.visible {
+  opacity: 1;
+  margin-right: -10px;
+  transform: translateX(0);
+}

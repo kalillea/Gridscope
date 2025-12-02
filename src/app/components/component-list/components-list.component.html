@@ -16,7 +16,11 @@
     <!-- Navn -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Navn</th>
-      <td mat-cell *matCellDef="let c">{{ c.name }}</td>
+      <td mat-cell *matCellDef="let c">
+        <mat-form-field appearance="outline" style="width: 100%; min-width: 120px">
+          <input matInput [(ngModel)]="c.name" (blur)="updateComponent(c)" placeholder="Navn" />
+        </mat-form-field>
+      </td>
     </ng-container>
 
     <!-- Status -->
@@ -24,7 +28,7 @@
       <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let c">
         <mat-form-field appearance="fill" class="status-select">
-          <mat-select [(value)]="c.status" (selectionChange)="updateStatus(c)">
+          <mat-select [(value)]="c.status" (selectionChange)="updateComponent(c)">
             <mat-option value="active">Active</mat-option>
             <mat-option value="inactive">Inactive</mat-option>
             <mat-option value="maintenance">Maintenance</mat-option>
@@ -36,7 +40,16 @@
     <!-- Type -->
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef>Type</th>
-      <td mat-cell *matCellDef="let c">{{ c.type }}</td>
+      <td mat-cell *matCellDef="let c">
+        <mat-form-field appearance="fill" class="type-select">
+          <mat-select [(value)]="c.type" (selectionChange)="updateComponent(c)">
+            <mat-option value="battery">Battery</mat-option>
+            <mat-option value="meter">Meter</mat-option>
+            <mat-option value="station">Station</mat-option>
+            <mat-option value="transformer">Transformer</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
     </ng-container>
 
     <!-- Sist oppdatert -->
@@ -71,7 +84,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <button mat-mini-fab color="accent" (click)="addComponent()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <div style="justify-content: center; display: flex">
+    <button class="add-button" mat-mini-fab color="accent" (click)="addComponent()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

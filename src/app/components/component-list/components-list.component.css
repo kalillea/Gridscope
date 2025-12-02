@@ -4,6 +4,7 @@
 
 .content {
   padding: 16px;
+  min-width: 150px;
 }
 
 .full-width-table {
@@ -20,4 +21,31 @@
 .error {
   color: #b00020;
   padding: 16px;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content; /* Let content define size (way nicer) */
+  padding: 10px 20px; /* Good touch area */
+  border-radius: 8px; /* Smooth rounded corners */
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.25s ease;
+  background-color: rgb(182, 251, 187);
+  border: 2px green;
+  outline: none;
+}
+
+.add-button:hover {
+  background-color: rgb(149, 247, 156);
+}
+
+.add-button mat-icon {
+  font-size: 20px;
 }

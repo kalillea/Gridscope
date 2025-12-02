@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -7,7 +7,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
+import { ComponentHistoryPoint, HistoryService } from '../../services/history-chart.service';
 
 import { EnergyComponentsService } from '../../services/energy-component.service';
 import { EnergyComponent } from '../../models/energy-component.model';
@@ -17,6 +20,8 @@ import { EnergyComponent } from '../../models/energy-component.model';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule, // ← REQUIRED for ngModel + ngModelOptions
+    MatInputModule, // ← REQUIRED for matInput
     MatTableModule,
     MatProgressSpinnerModule,
     MatButtonModule,
@@ -34,15 +39,21 @@ export class ComponentsListComponent implements OnInit {
   isLoading = false;
   errorMessage: string | null = null;
   private cdr = inject(ChangeDetectorRef);
+  @Output() historySelected = new EventEmitter<ComponentHistoryPoint[]>();
 
   // for mat-table
   displayedColumns: string[] = ['name', 'status', 'type', 'lastUpdated', 'delete', 'history'];
+  currentHistory: string[] = [];
 
-  constructor(private componentsService: EnergyComponentsService) {}
+  constructor(
+    private componentsService: EnergyComponentsService,
+    private historyService: HistoryService
+  ) {}
 
   ngOnInit(): void {
     this.loadComponents();
   }
+
   loadComponents(): void {
     this.isLoading = true;
     this.errorMessage = null;
@@ -64,26 +75,63 @@ export class ComponentsListComponent implements OnInit {
   }
 
   addComponent() {
-    const newComponent: EnergyComponent = {
-      id: crypto.randomUUID(),
+    const requestBody = {
       name: 'New component',
       status: 'inactive',
       type: 'meter',
-      lastUpdated: new Date().toISOString(),
     };
 
-    this.components = [...this.components, newComponent];
+    this.componentsService.create(requestBody).subscribe({
+      next: (created) => {
+        this.components = [...this.components, created];
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Failed to create component:', err);
+      },
+    });
   }
 
   deleteComponent(c: any) {
-    this.components = this.components.filter((x) => x !== c);
+    this.componentsService.delete(c.id).subscribe({
+      next: () => {
+        this.components = this.components.filter((x) => x.id !== c.id); // front end update
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Deletion failed:', err);
+      },
+    });
   }
 
-  updateStatus(_t33: any) {
-    throw new Error('Method not implemented.');
+  updateComponent(c: any) {
+    this.componentsService
+      .update(c.id, {
+        name: c.name,
+        status: c.status,
+        type: c.type,
+      })
+      .subscribe({
+        next: (updated) => {
+          console.log('Updated!', updated);
+        },
+        error: (err) => {
+          console.error('Update failed:', err);
+        },
+      });
   }
 
-  viewHistory(_t91: any) {
-    throw new Error('Method not implemented.');
+  viewHistory(c: any) {
+    this.historyService.getHistory(c.id).subscribe({
+      next: (history) => {
+        this.historySelected.emit(history);
+      },
+      error: (err) => {
+        console.error('Failed to load history:', err);
+        this.historySelected.emit([]);
+      },
+    });
   }
+
+  save() {}
 }
