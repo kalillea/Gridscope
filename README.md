@@ -5,7 +5,7 @@ Gridscope is a dashboard built with **Angular**, **Material UI**, and **Chart.js
 The project consists of two separate repositories:
 
 * **Gridscope**. Angular frontend application (this repo).
-* **GridScope-api**. Node.js/Express REST API providing component and history data.
+* **Gridscope-api**. Node.js/Express REST API providing component and history data.
 
 
 ## Stack
