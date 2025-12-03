@@ -2,25 +2,25 @@
 
 Gridscope is a dashboard built with **Angular**, **Material UI**, and **Chart.js**, designed for managing and visualizing the state of energy network components such as meters, batteries, transformers, and chargers.
 
-The project consists of **two separate repositories**:
+The project consists of two separate repositories:
 
-* **GridScope** → Angular application (this repo)
-* **GridScope-API** → Node.js/Express REST API providing component + history data
+* **GridScope**. Angular application (this repo).
+* **GridScope-API**. Node.js/Express REST API providing component and history data.
 
 
-## Tech Stack
+## Stack
 
 ### **Frontend**
 
-* Angular
-* Angular Material
-* Chart.js + ng2-charts
-* TypeScript
+* Angular (Typescript)
+* Angular Material UI
+* Chart.js
 
-### **Backend** (in *GridScope-API* repository)
+### **Backend** (in GridScope-api repository)
 
-* Node.js
-* RESTful API
+* Node.js and Express
+
+The API follows RESTful design principles.
 
 
 ## Project Structure (Frontend)
@@ -32,6 +32,8 @@ src/
  │   │   ├─ component-list/        # Table of components
  │   │   ├─ history-chart/         # Chart.js component
  │   │   ├─ toolbar/               # Header bar
+ │   ├─ models/
+ │   │   ├─ energy-component.model.ts
  │   ├─ services/
  │   │   ├─ energy-component.service.ts
  │   │   ├─ history.service.ts
@@ -62,12 +64,6 @@ npm install
 
 ```bash
 ng serve
-```
-
-Now visit:
-
-```
-http://localhost:4200
 ```
 
 ---
@@ -119,5 +115,5 @@ http://localhost:3000
 | ------ | ------------------ | ------------------------- |
 | GET    | `/api/history/:id` | Get history for component |
 
-History is **randomly generated** per component at server startup and provides 50 timestamp/value pairs per component.
+History is randomly generated per component at server startup and provides 50 timestamp/value pairs per component.
 
